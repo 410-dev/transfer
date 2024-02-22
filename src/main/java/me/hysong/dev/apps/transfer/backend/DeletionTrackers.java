@@ -8,8 +8,6 @@ import java.io.FileReader;
 
 public class DeletionTrackers {
 
-    private static Thread thread;
-
     public static void scanAndDelete() {
         File metaDir = new File(PathFactory.getPath() + "/metas/");
         File[] files = metaDir.listFiles();
@@ -66,26 +64,7 @@ public class DeletionTrackers {
         }
     }
 
-
-    public static void createAsyncThread() {
-
-        if (thread != null) return;
-
-        thread = new Thread(() -> {
-            while (true) {
-                scanAndDelete();
-                System.out.println("[Transfer] Scanned and deleted expired files");
-                try {
-                    Thread.sleep(1000 * 60 * 20);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-        thread.start();
-        System.out.println("[Transfer] Started deletion tracker thread");
-
+    public static void scanAndDeleteAsynchronously() {
+        new Thread(DeletionTrackers::scanAndDelete).start();
     }
-
 }

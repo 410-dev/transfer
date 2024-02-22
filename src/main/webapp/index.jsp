@@ -20,12 +20,12 @@
     Logger.accessLogger(request, response);
     request.setCharacterEncoding("UTF-8");
     response.setCharacterEncoding("UTF-8");
-    DeletionTrackers.createAsyncThread();
+    DeletionTrackers.scanAndDeleteAsynchronously();
 %>
 
 <div class="container">
     <h1 class="title">Transfer</h1>
-    <p class="versionstr">Build 18Feb2024.A</p>
+    <p class="versionstr">Build 22Feb2024.A</p>
     <form action="transfer_fupload" method="post" enctype="multipart/form-data">
         <div class="upload-box">
             <input type="file" name="file" id="file" class="inputfile" />

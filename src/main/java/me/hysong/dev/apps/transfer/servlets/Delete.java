@@ -1,6 +1,7 @@
 package me.hysong.dev.apps.transfer.servlets;
 
 import com.google.gson.JsonObject;
+import me.hysong.dev.apps.transfer.backend.DeletionTrackers;
 import me.hysong.dev.modules.PathFactory;
 
 import javax.servlet.ServletException;
@@ -105,6 +106,8 @@ public class Delete extends HttpServlet {
         responseObject.addProperty("message", "File deleted");
         response.getWriter().write(responseObject.toString());
         response.setStatus(200);
+
+        DeletionTrackers.scanAndDeleteAsynchronously();
 
     }
 

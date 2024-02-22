@@ -26,7 +26,7 @@ public class Download extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         Logger.accessLogger(request, response);
 
-        DeletionTrackers.createAsyncThread();
+        DeletionTrackers.scanAndDelete();
 
         String[] paths = request.getRequestURI().split("/");
 

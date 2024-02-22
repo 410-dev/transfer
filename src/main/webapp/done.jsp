@@ -21,7 +21,7 @@
     Logger.accessLogger(request, response);
     request.setCharacterEncoding("UTF-8");
     response.setCharacterEncoding("UTF-8");
-    DeletionTrackers.createAsyncThread();
+    DeletionTrackers.scanAndDeleteAsynchronously();
     String URL = request.getParameter("url");
     String FILENAME = URL.substring(URL.lastIndexOf('/') + 1);
     String UID = URL.replaceAll("/" + FILENAME, "").substring(URL.replaceAll("/" + FILENAME, "").lastIndexOf('/') + 1);

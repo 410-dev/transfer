@@ -1,5 +1,6 @@
 package me.hysong.dev.apps.transfer.servlets;
 
+import me.hysong.dev.apps.transfer.backend.DeletionTrackers;
 import me.hysong.dev.modules.Logger;
 import me.hysong.dev.modules.PathFactory;
 import me.hysong.libhycore.CoreSHA;
@@ -34,6 +35,7 @@ public class Upload extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
 
         try{
+            DeletionTrackers.scanAndDeleteAsynchronously();
             // Get file part from the request
             Part filePart = request.getPart("file");
             String fileName = filePart.getSubmittedFileName();
@@ -64,6 +66,7 @@ public class Upload extends HttpServlet {
             while ((bytesRead = inputStream.read(buffer)) != -1) {
                 outputStream.write(buffer, 0, bytesRead);
             }
+            Logger.simpleLog("[Transfer] Upload path: " + uploadPath);
 
             // Close the streams
             inputStream.close();
